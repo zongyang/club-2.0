@@ -1,12 +1,17 @@
+var express = require('express');
+var router = express.Router();
 var user = require('./user.js');
 var project = require('./project.js');
 var news = require('./news.js');
 var introduce = require('./introduce.js');
 var login = require('./login.js');
-var modify=require('./modify');
+var modify=require('./modify.js');
+var carousel=require('./carousel.js');
 
 
-var admin_introduce = function(router) {
+
+router.use('/carousel',carousel);
+/*var admin_introduce = function(router) {
     login(router);
 	router.all('/admin/*', function(req, res, next) {
 		if (req.session.user != null) {
@@ -23,6 +28,6 @@ var admin_introduce = function(router) {
 	introduce(router);
 	modify(router);
 	
-}
+}*/
 
-module.exports = admin_introduce;
+module.exports = router;

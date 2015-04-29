@@ -1,60 +1,25 @@
-include ./user
-include ./project
-include ./news
-include ./introduce
-include ./login
-include ./modify
+
 extends ../layout
 
-
 block content
-    #admin_tab
-        +admin_menu()
-    #admin_content
-      if page.users
-        +users()
-      if page.projects
-        +projects()
-      if page.news
-        +news()
-      if page.introduce
-        +introduce()
-      if page.modify
-        +modify()
-      if page.login
-        +login()
-    .clear
+  #admin.container
+    .row
+      .col-md-3.side-bar
+        ul.nav.nav-pills.nav-stacked
+          li.active
+            a.text-center(href='#') 图片轮转
+          li
+            a.text-center(href='#') 新闻管理
+          li
+            a.text-center(href='#') 项目管理
+          li
+            a.text-center(href='#') 俱乐部简介
+          li
+            a.text-center(href='#') 报名管理
+          li
+            a.text-center(href='#') 登陆管理
+      .col-md-9
+        block admin-content
 
-//管理页 右侧菜单
-mixin admin_menu()
-    #admin_menu
-        .ui.vertical.menu
-          if page.users
-            a.active.item(href='users') 人员管理
-          else
-            a.item(href='users') 人员管理
-          if page.projects
-            a.active.item(href='projects') 项目管理
-          else
-            a.item(href='projects') 项目管理
-          if page.news
-            a.active.item(href='news') 消息管理
-          else
-            a.item(href='news') 消息管理
-          if page.introduce
-            a.active.item(href='introduce') 俱乐部简介修改
-          else
-            a.item(href='introduce') 俱乐部简介修改
-          if page.modify
-            a.active.item(href='modify') 管理员密码修改
-          else
-            a.item(href='modify') 管理员密码修改
-          if page.login
-            a.active.item(href='./') 管理员登录
-          else
-            a.item(href='./') 管理员登录
-//基本输入框
-mixin input-place(type,placeholder,icon,cls)
-    .ui.left.icon.input.fluid
-            input(class=cls,type=type,placeholder=placeholder)
-            i.icon(class=icon)
+
+

@@ -6,11 +6,11 @@ var admin = require('./admin/admin.js');
 
 
 router.get('/', function(req, res, next) {
-	res.render('layout');
+	res.redirect('/index');
 });
-//index(router);
-//admin(router);
 
+router.use('/index', index);
+router.use('/admin', admin);
 
 
 module.exports = router;

@@ -1,0 +1,60 @@
+extends ../admin
+
+block admin-content
+    #admin-carousel
+        button.btn.btn-primary.add-carousel 添加
+        table.table.table-striped.table-bordered.table-hover
+            thead
+                tr
+                    th.text-center 标题
+                    th.text-center 内容
+                    th.text-center 链接
+                    th.text-center 图片
+                    th.text-center 编辑/删除
+            tbody
+                tr
+                    td Example headline.
+                    td Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                    td 
+                        strong 百度
+                        a(href='#') www.baidu.com
+                    td 
+                        a(href='#') 5.jpg
+                    td.options 
+                        span.glyphicon.glyphicon-edit
+                        span.glyphicon.glyphicon-remove
+
+
+    // 模态框（Modal）
+    #admin-carousel-modal.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true')
+              | ×
+            h4.modal-title.text-primary
+              | 添加轮转图片
+          .modal-body
+            form(role='form')
+              .form-group
+                label 名称
+                input.form-control(type='text', placeholder='请输入名称')
+              .form-group
+                label 链接地址
+                .row
+                    .col-md-3
+                        input.form-control(type='text', placeholder='请链接名称')
+                    .col-md-9
+                        input.form-control(type='text', placeholder='请链接地址')
+              .form-group
+                label 图片
+                input(type='file') 
+              .form-group
+                label(for='name') 详细内容
+                textarea.form-control(rows='3',placeholder='详细内容')       
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal')
+              | 关闭
+            button.btn.btn-primary(type='button')
+              | 确定
+  

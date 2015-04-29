@@ -1,8 +1,19 @@
+var express = require('express');
+var router = express.Router();
 var User = require('../models/user.js');
 var common = require('./common.js');
 var News = require('../models/news');
 var Project = require('../models/project');
 var Introduce = require('../models/introduce');
+
+router.get('/', function(req, res, next) {
+  res.render('index/index', {
+    module: 'index',
+    page: {
+      admin: false
+    }
+  })
+})
 
 function index(router) {
   //首页
@@ -121,4 +132,5 @@ function index(router) {
 
   });
 }
-module.exports = index;
+
+module.exports = router;

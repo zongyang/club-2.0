@@ -1,27 +1,16 @@
-var db=require('./db.js');
-var common=require('./common.js');
-var common1=require('../routes/common.js');
-function Project(project){
-	this.obj=project;	
+var Model = require('./model.js');
+var util = require('util');
+
+function Photo(shopId, address) {
+	/*this.mall = mall;
+	this.shop = shop;
+	this.address = address;
+	Model.call(this, 'photo');*/
+	//子类定义的非原型属性放在这个后面，不然会被覆盖
+
 }
-//项目的collection
-Project.prototype.collection=db.get('projects');
-//存储项目信息
-Project.prototype.insert=common.insert;
-//读取项目信息
-Project.prototype.find=common.find;
-//读取项目信息
-Project.prototype.findOne=common.findOne;
-//项目更新操作
-Project.prototype.findAndModify=common.findAndModify;
-Project.prototype.remove=common.remove;
-//检验
-Project.prototype.check=function(){
-	if(common1.isEmpty(this.obj.name)){
-		return {success:false,info:'项目名不能为空！'};
-	}
-	return {success:true,info:''};
-}
+util.inherits(Photo, Model);
+//子类定义的原型属性放在这个后面，不然会被覆盖
 
 
-module.exports=Project;
+module.exports = Photo;

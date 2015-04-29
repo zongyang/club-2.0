@@ -8,16 +8,20 @@ html(lang='zh-CN')
     meta(name='author',content='')
     title 中山大学智能硬件和数据分析俱乐部
     link(rel='icon',href='http://v3.bootcss.com/favicon.ico')
-    link(rel='stylesheet', href='bower_components/bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet', href='layout.css')
-
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/layout.css')
+    if page.admin
+      link(rel='stylesheet',href='/admin/admin.css')
+      link(rel='stylesheet',href='/admin/#{module}/#{module}.css')
+    else
+      link(rel='stylesheet',href='/#{module}/#{module}.css')
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     script(src='bower_components/html5shiv.min.js')
     script(src='bower_components/respond.min.js')
     <![endif]-->
   body
-    .navbar-wrapper
+    nav.navbar-wrapper
       .container
         nav.navbar.navbar-inverse.navbar-static-top
           .container
@@ -54,89 +58,14 @@ html(lang='zh-CN')
                     li
                       a(href='#') One more separated link
     
-    //Carousel
-    #myCarousel.carousel.slide(data-ride='carousel')
-      // Indicators
-      ol.carousel-indicators
-        li(data-target='#myCarousel', data-slide-to='0')
-        li.active(data-target='#myCarousel', data-slide-to='1')
-        li(data-target='#myCarousel', data-slide-to='2')
-      .carousel-inner(role='listbox')
-        .item
-          img.first-slide(src='5.jpg', alt='First slide')
-          .container
-            .carousel-caption
-              h1 Example headline.
-              p
-                | Note: If you're viewing this page via a 
-                code file://
-                |  URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.
-              p
-                a.btn.btn-primary(href='#', role='button') Sign up 
-                a.btn.btn-primary(href='#', role='button') Sign in
-        .item.active
-          img.second-slide(src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', alt='Second slide')
-          .container
-            .carousel-caption
-              h1 Another example headline.
-              p
-                | Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-              p
-                a.btn.btn-lg.btn-primary(href='#', role='button') Learn more
-        .item
-          img.third-slide(src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', alt='Third slide')
-          .container
-            .carousel-caption
-              h1 One more for good measure.
-              p
-                | Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-              p
-                a.btn.btn-lg.btn-primary(href='#', role='button') Browse gallery
-      a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
-        span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
-        span.sr-only Previous
-      a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
-        span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
-        span.sr-only Next
-    
-    //Marketing messaging and featurettes
-    // Wrap the rest of the page in another container to center all the content.
-    .container
-      // START THE FEATURETTES
-      .row.news
-        .col-md-6
-          h2
-            | 新闻
-          hr
-          ul
-            li 
-              a(href='#') 陈云贤副省长到视频图像智能分析与应用技术公安部重点实验室调研指导工作
-            li 
-              a(href='#')  陈云贤副省长到视频图像智能分析与应用技术公安部重点实验室调研指导工作
-            li 
-              a(href='#') 陈云贤副省长到视频图像智能分析与应用技术公安部重点实验室调研指导工作
-        .col-md-6
-          h2
-            | 项目
-          hr
-          h4 项目一
-          p
-            | 长期从事计算机图形图像处理、多媒体技术、视频编码、嵌入式图形图像处理、移动计算等方面的研究工作。目前研究课题包括H.264视频编码、图像检索、图像矢量化等。
-          hr
-          h4 项目一
-          p
-            | 长期从事计算机图形图像处理、多媒体技术、视频编码、嵌入式图形图像处理、移动计算等方面的研究工作。目前研究课题包括H.264视频编码、图像检索、图像矢量化等。
-          hr
-          h4 项目一
-          p
-            | 长期从事计算机图形图像处理、多媒体技术、视频编码、嵌入式图形图像处理、移动计算等方面的研究工作。目前研究课题包括H.264视频编码、图像检索、图像矢量化等。
-      hr.featurette-divider
-      
-      // FOOTER
-      footer
-        p.pull-right
-          a(href='#') Back to top
-        address
+    block content
+
+    // FOOTER
+    footer.container
+      hr
+      p.pull-right
+        a(href='#') Back to top
+      address
         strong 中山大学智能硬件和数据分析俱乐部
         br
         abbr(title='Address') 地址:
@@ -145,14 +74,19 @@ html(lang='zh-CN')
         abbr(title='Phone') 电话:
         |  020-7787788
 
-        
-
- 
+         
     //Bootstrap core JavaScript
     // Placed at the end of the document so the pages load faster
-    script(type='text/javascript' src='bower_components/jquery/dist/jquery.min.js')
-    script(type='text/javascript' src='bower_components/bootstrap/dist/js/bootstrap.min.js')
+    script(type='text/javascript' src='/bower_components/jquery/dist/jquery.min.js')
+    script(type='text/javascript' src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
     // IE10 viewport hack for Surface/desktop Windows 8 bug
-    script(type='text/javascript' src='bower_components/ie10-viewport-bug-workaround.js')
-    script(type='text/javascript' src='layout.js')
+    script(type='text/javascript' src='/bower_components/ie10-viewport-bug-workaround.js')
+
+    script(type='text/javascript' src='/layout.js')
+    if page.admin
+      script(type='text/javascript' src='/admin/admin.js')
+      script(type='text/javascript' src='/admin/#{module}/#{module}.js')
+    else
+      script(type='text/javascript' src='/#{module}/#{module}.js')
+
       
