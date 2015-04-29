@@ -1,0 +1,23 @@
+mixin modify()
+    #modify
+        .ui.two.column.grid
+            .column
+                .ui.card.fluid
+                    .content
+                        .header 管理员名修改
+                        .description
+                            +input-place('text','输入新用户名','user','name')
+                    .extra.content
+                        .ui.button.positive.name.ok 确 定
+            .column
+                .ui.card.fluid
+                    .content
+                        .header 密码修改
+                        .description
+                            +input-place('password','输入原密码','keyboard','old')
+                            +input-place('password','输入新密码','keyboard','new')
+                            +input-place('password','密码确认','keyboard','again')
+                    .extra.content
+                        .ui.button.positive.pwd.ok 确 定
+                        .ui.button.negative.pwd.reset 重 置
+       

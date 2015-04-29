@@ -1,0 +1,30 @@
+mixin login()
+    #login
+        if loginFLag
+            .login.hidden
+                +input-place('text','管理员名','user','name')
+                +input-place('password','管理员密码','keyboard','password')
+                .buttons
+                    .ui.button.green.ok 确 定
+                    .ui.button.green.reset 重 置
+                    .clear
+            .logined
+                .ui.icon.message
+                    i.student.icon
+                    .content
+                        .header  已登录！
+                .ui.button.logout.green 注销
+        else
+            .login
+                +input-place('text','管理员名','user','name')
+                +input-place('password','管理员密码','keyboard','password')
+                .buttons
+                    .ui.button.green.ok 确 定
+                    .ui.button.green.reset 重 置
+                    .clear
+            .logined.hidden
+                .ui.icon.message
+                    i.student.icon
+                    .content
+                        .header  已登录！
+                .ui.button.logout.green 注销

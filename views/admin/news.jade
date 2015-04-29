@@ -1,0 +1,48 @@
+mixin news()
+   #news
+      +newsEdit()
+      .ui.button.green.add 添加
+      table.ui.sortable.celled.striped.table
+        thead
+          tr 
+             th 消息名
+             th 简介
+             th 日期
+             th
+             //详细内容隐藏 
+        tbody
+            each news in newslist 
+                tr
+                    td.name #{news.name}
+                    td.info #{news.info}
+                    td.date #{news.date}
+                    td
+                       i.close.icon
+                       i.edit.icon
+                    td.hidden.content #{news.content}
+                    td.hidden.id #{news._id}
+
+
+
+mixin newsEdit()
+    .ui.fullscreen.modal.news
+        i.close.icon
+        .header
+            p.title 
+        .content
+            .ui.form
+                .ui.two.fields
+                  .field.name
+                      lable 消息标题
+                      input(type='text')
+                  .field.info
+                      lable 简介
+                      input(type='text')
+                .field.date
+                  p 日期
+                .field.content
+                    lable 详细内容
+                    textarea
+        .actions
+            .ui.positive.button 确定
+            .ui.negative.button 取消

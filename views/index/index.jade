@@ -1,0 +1,76 @@
+extends ../layout
+block content
+    #index
+        .ui.two.column.grid
+            .column
+                +news()
+                +projects()
+            .column
+                +introduces()
+                +sign-up() 
+
+mixin news
+    .ui.segment#news
+        a.ui.ribbon.label.green.big 新闻
+        .ui.animated.divided.list
+            each news in newsList
+                .item
+                    i.icon.triangle.right
+                    a.content(href='news?id=#{news._id}',target='_blank') 
+                        .header #{news.name}
+                        .description 
+                            span  #{news.info}
+                            span.right.floated [#{news.date}]
+                            span.id.hidden #{news._id}
+mixin projects
+    .ui.segment#project
+        a.ui.ribbon.label.green.big 项目
+        .ui.animated.divided.list
+            each project in projects
+                .item
+                    i.icon.triangle.right
+                    a.content(href='projects?id=#{project._id}',target='_blank') 
+                        .header #{project.name}
+                        .description 
+                            span  #{project.info}              
+mixin introduces
+    .ui.segment#introduces
+        a.ui.ribbon.label.green.big 俱乐部简介
+        .description #{introduce.info}
+mixin sign-up
+    .ui.segment#sign-up
+        a.ui.ribbon.label.green.big 报名
+        .ui.form
+            .ui.two.fields
+                +input-place('姓 名','请输入姓名','name')
+                +input-place('学 号','请输入学号','no')
+            .ui.two.fields
+                +input-place('学 院','请输入学院','academy')
+                +input-place('专 业','请输入专业','profession')
+            .ui.two.fields
+                +input-place('年 级','请输入年级','grade')
+                +input-place('手 机','请输入手机','phone')
+            .ui.two.fields
+                +input-place('邮 箱','请输入邮箱','email')
+                .ui.field.project
+                    label 项 目
+                    select.ui.dropdown
+                        option(value='') 请选择项目
+                        each project in projects
+                            option(value='#{project.name}') #{project.name}
+            .ui.field.file
+                 label 上传简历（最大10MB）
+                 input(type='file' title='请选择简历')
+            .ui.field
+                 .ui.button.blue.fluid.submit 确定   
+
+
+mixin input-place(lable,placeholder,cls)
+  .field(class=cls)
+    lable=lable
+    input(placeholder=placeholder,type='text')
+
+
+
+
+            

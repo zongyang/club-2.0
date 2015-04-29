@@ -1,0 +1,8 @@
+
+extends ../layout
+block content
+    #news
+        .ui.divider
+        .ui.header.center.aligned #{news.name}
+        .ui.author-date  #{news.date}
+        .ui.content #{news.content}

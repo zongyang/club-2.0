@@ -1,0 +1,32 @@
+body {
+  padding: 50px; }
+  body .clear {
+    clear: both; }
+  body .hidden {
+    display: none; }
+  body .body {
+    min-width: 800px; }
+  body #layout {
+    margin: 20px; }
+  body #navigation {
+    margin: 0 0 15px 0; }
+  body #admin_tab {
+    margin: 30px 0 0 15px;
+    float: left;
+    width: 25%; }
+  body #admin_content {
+    margin: 30px 0 0 15px;
+    width: 70%;
+    min-width: 500px;
+    float: right; }
+
+#news {
+  margin: 0 15px 50px 15px; }
+  #news .author-date {
+    text-align: right; }
+  #news .content {
+    text-indent: 2em;
+    line-height: 24px;
+    margin-top: 20px; }
+
+/*# sourceMappingURL=news.css.map */
