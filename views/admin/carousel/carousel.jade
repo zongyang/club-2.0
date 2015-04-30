@@ -6,22 +6,23 @@ block admin-content
         table.table.table-striped.table-bordered.table-hover
             thead
                 tr
-                    th 标题
-                    th 内容
-                    th 链接
-                    th 图片
+                    th.text-center 标题
+                    th.text-center 内容
+                    th.text-center 链接
+                    th.text-center 图片
                     th 
             tbody
               each doc in docs
                 tr
                     td.id.hidden #{doc._id}
-                    td.name #{doc.name}
+                    td.name 
+                      strong.text-primary #{doc.name}
                     td.content #{doc.content}
                     td 
                         strong
                           a.url(href='#{doc.url}') #{doc.urlName}
                     td 
-                        a.img(href='/#{doc.img}') 预览
+                        a.img(href='#{doc.img}') 预览
                     td.options 
                         //span.glyphicon.glyphicon-edit
                         span.glyphicon.glyphicon-remove

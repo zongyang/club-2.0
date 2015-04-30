@@ -8,17 +8,11 @@ var Introduce = require('../models/introduce');
 var Carousel = require('../models/carousel.js');
 
 router.get('/', function(req, res, next) {
-  res.render('index/index', {
-    module: 'index',
-    page: {
-      admin: false
-    }
-  })
-  return;
-  new(Carousel).find({}, function(err, docs) {
+  var carousel = new Carousel();
+  carousel.find({}, function(err, docs) {
     res.render('index/index', {
       module: 'index',
-      carousel: docs,
+      carousels: docs,
       page: {
         admin: false
       }

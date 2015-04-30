@@ -1,11 +1,13 @@
 #admin-carousel > table {
   margin-top: 30px; }
   #admin-carousel > table td {
-    vertical-align: middle; }
-  #admin-carousel > table td.options {
-    width: 80px;
-    text-align: center; }
-    #admin-carousel > table td.options span {
-      cursor: pointer; }
-    #admin-carousel > table td.options span:first-child {
-      margin-right: 5px; }
+    vertical-align: middle;
+    text-align: center;
+    min-width: 80px; }
+    #admin-carousel > table td.content {
+      vertical-align: baseline;
+      text-align: left; }
+    #admin-carousel > table td.options {
+      min-width: 30px; }
+      #admin-carousel > table td.options span {
+        cursor: pointer; }

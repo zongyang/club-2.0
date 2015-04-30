@@ -3,10 +3,14 @@
 		margin-top: 30px
 		td
 			vertical-align: middle
-		td.options
-			width: 80px
 			text-align: center
-			span
-				cursor: pointer
-			span:first-child
-				margin-right: 5px
+			min-width: 80px
+			&.content
+				vertical-align: baseline
+				text-align: left
+			&.options
+				min-width: 30px
+				span
+					cursor: pointer
+				//span:first-child
+					//margin-right: 5px

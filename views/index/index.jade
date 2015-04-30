@@ -4,40 +4,20 @@ block content
     #carousel.carousel.slide(data-ride='carousel')
       // Indicators
       ol.carousel-indicators
-        li(data-target='#carousel', data-slide-to='0')
-        li.active(data-target='#carousel', data-slide-to='1')
-        li(data-target='#carousel', data-slide-to='2')
+        -for(var i=0;i<carousels.length;i++)
+          li(data-target='#carousel', data-slide-to='#{i}')
       .carousel-inner(role='listbox')
-        .item
-          img.first-slide(src='/5.jpg', alt='First slide')
-          .container
-            .carousel-caption
-              h1 Example headline.
-              p
-                | Note: If you're viewing this page via a 
-                code file://
-                |  URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.
-              p
-                a.btn.btn-primary(href='#', role='button') Sign up 
-                a.btn.btn-primary(href='#', role='button') Sign in
-        .item.active
-          img.second-slide(src='/5.jpg', alt='Second slide')
-          .container
-            .carousel-caption
-              h1 Another example headline.
-              p
-                | Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-              p
-                a.btn.btn-lg.btn-primary(href='#', role='button') Learn more
-        .item
-          img.third-slide(src='/5.jpg', alt='Third slide')
-          .container
-            .carousel-caption
-              h1 One more for good measure.
-              p
-                | Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-              p
-                a.btn.btn-lg.btn-primary(href='#', role='button') Browse gallery
+        each carousel in carousels
+          .item
+            img.first-slide(src='#{carousel.img}', alt='First slide')
+            .container
+              .carousel-caption
+                h1 #{carousel.name}
+                p #{carousel.content}
+                  
+                p
+                  a.btn.btn-primary(href='#{carousel.url}', role='button') #{carousel.name}
+        
       a.left.carousel-control(href='#carousel', role='button', data-slide='prev')
         span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
         span.sr-only Previous

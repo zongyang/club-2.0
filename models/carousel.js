@@ -14,7 +14,7 @@ Carousel.prototype.find = function(data, callback) {
 		var pos;
 		docs.forEach(function(doc) {
 			pos = doc.img.indexOf('/');
-			doc.img = doc.img.substr(pos+1);
+			doc.img = doc.img.substr(pos);
 		});
 		callback(err, docs);
 	});
