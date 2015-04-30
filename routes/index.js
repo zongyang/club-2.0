@@ -5,6 +5,7 @@ var common = require('./common.js');
 var News = require('../models/news');
 var Project = require('../models/project');
 var Introduce = require('../models/introduce');
+var Carousel = require('../models/carousel.js');
 
 router.get('/', function(req, res, next) {
   res.render('index/index', {
@@ -13,6 +14,16 @@ router.get('/', function(req, res, next) {
       admin: false
     }
   })
+  return;
+  new(Carousel).find({}, function(err, docs) {
+    res.render('index/index', {
+      module: 'index',
+      carousel: docs,
+      page: {
+        admin: false
+      }
+    })
+  });
 })
 
 function index(router) {

@@ -16,6 +16,8 @@ body {
       padding-left: 15px; }
       body .navbar-wrapper .navbar .container {
         width: auto; }
+  body .alert {
+    margin: 10px 0 10px 0; }
 
 @media (min-width: 768px) {
   .navbar-wrapper {

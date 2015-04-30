@@ -6,7 +6,7 @@ var common = {
 			news: false,
 			introduce: false,
 			login: false,
-			modify:false
+			modify: false
 		}
 	},
 	getDate: function() {
@@ -20,14 +20,19 @@ var common = {
 		return year + '-' + month + '-' + day;
 
 	},
-	isEmpty:function(str){
-		if(str==null){
-			return true;
+	isEmpty: function() {
+		var len = arguments.length;
+		var str;
+		for (var i = 0; i < len; i++) {
+			str = arguments[i];
+
+			if (str === null)
+				return true;
+			if (str.trim() === '')
+				return true;
+
 		}
-		if(str.trim()==''){
-			return true;
-		}
-		return false;
+		return false
 
 	}
 };

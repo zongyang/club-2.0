@@ -21,6 +21,20 @@ html(lang='zh-CN')
     script(src='bower_components/respond.min.js')
     <![endif]-->
   body
+
+    //modal
+    #modal.modal.fade(tabindex='-1', role='dialog',  aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h3.title
+          .modal-body
+            p.info 
+          .modal-footer
+            button.btn.btn-default.cancle(data-dismiss='modal', aria-hidden='true') 取消
+            button.btn.btn-primary.ok 确定
+
     nav.navbar-wrapper
       .container
         nav.navbar.navbar-inverse.navbar-static-top

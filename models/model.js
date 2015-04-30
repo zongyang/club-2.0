@@ -1,4 +1,3 @@
-
 var settings = require('../settings.js');
 var mongojs = require('mongojs');
 var db;
@@ -16,8 +15,8 @@ function Model(collectionName) {
     this.collection = db.collection(collectionName);
 }
 
-['insert','find', 'findOne','remove'].forEach(function(method){
-    Model.prototype[method] = function(){
+['insert', 'find', 'findOne', 'remove'].forEach(function(method) {
+    Model.prototype[method] = function() {
         this.collection[method].apply(this.collection, arguments);
     }
 })

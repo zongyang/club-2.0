@@ -6,22 +6,24 @@ block admin-content
         table.table.table-striped.table-bordered.table-hover
             thead
                 tr
-                    th.text-center 标题
-                    th.text-center 内容
-                    th.text-center 链接
-                    th.text-center 图片
-                    th.text-center 编辑/删除
+                    th 标题
+                    th 内容
+                    th 链接
+                    th 图片
+                    th 
             tbody
+              each doc in docs
                 tr
-                    td Example headline.
-                    td Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                    td.id.hidden #{doc._id}
+                    td.name #{doc.name}
+                    td.content #{doc.content}
                     td 
-                        strong 百度
-                        a(href='#') www.baidu.com
+                        strong
+                          a.url(href='#{doc.url}') #{doc.urlName}
                     td 
-                        a(href='#') 5.jpg
+                        a.img(href='/#{doc.img}') 预览
                     td.options 
-                        span.glyphicon.glyphicon-edit
+                        //span.glyphicon.glyphicon-edit
                         span.glyphicon.glyphicon-remove
 
 
@@ -33,28 +35,28 @@ block admin-content
             button.close(type='button', data-dismiss='modal', aria-hidden='true')
               | ×
             h4.modal-title.text-primary
-              | 添加轮转图片
+              | 
           .modal-body
             form(role='form')
               .form-group
                 label 名称
-                input.form-control(type='text', placeholder='请输入名称')
+                input.form-control.name(type='text', placeholder='请输入名称')
               .form-group
                 label 链接地址
                 .row
                     .col-md-3
-                        input.form-control(type='text', placeholder='请链接名称')
+                        input.form-control.urlName(type='text', placeholder='请链接名称')
                     .col-md-9
-                        input.form-control(type='text', placeholder='请链接地址')
+                        input.form-control.url(type='text', placeholder='请链接地址')
               .form-group
                 label 图片
-                input(type='file') 
+                input.img(type='file') 
               .form-group
                 label(for='name') 详细内容
-                textarea.form-control(rows='3',placeholder='详细内容')       
+                textarea.form-control.content(rows='3',placeholder='详细内容')       
           .modal-footer
-            button.btn.btn-default(type='button', data-dismiss='modal')
+            button.btn.btn-default.cancle(type='button', data-dismiss='modal')
               | 关闭
-            button.btn.btn-primary(type='button')
+            button.btn.btn-primary.ok(type='button')
               | 确定
   
