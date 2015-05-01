@@ -98,6 +98,10 @@ html(lang='zh-CN')
 
     script(type='text/javascript' src='/layout.js')
     if page.admin
+      // 编辑器配置文件
+      script(type='text/javascript', src='/ueditor/ueditor.config.js')
+      // 编辑器源码文件
+      script(type='text/javascript', src='/ueditor/ueditor.all.js')
       script(type='text/javascript' src='/admin/admin.js')
       script(type='text/javascript' src='/admin/#{module}/#{module}.js')
     else

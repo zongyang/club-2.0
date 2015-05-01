@@ -11,23 +11,6 @@ var carousel=require('./carousel.js');
 
 
 router.use('/carousel',carousel);
-/*var admin_introduce = function(router) {
-    login(router);
-	router.all('/admin/*', function(req, res, next) {
-		if (req.session.user != null) {
-			next();
-		} else {
-			req.flash('error','未登录！');
-			res.redirect('/admin');
-		}
-	})
-
-	project(router);
-	user(router);
-	news(router);
-	introduce(router);
-	modify(router);
-	
-}*/
+router.use('/news',news);
 
 module.exports = router;

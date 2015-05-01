@@ -1,48 +1,23 @@
-mixin news()
-   #news
-      +newsEdit()
-      .ui.button.green.add 添加
-      table.ui.sortable.celled.striped.table
+extends ../admin
+
+block admin-content
+  #admin-news
+    .list
+      button.btn.btn-primary.add-news 添加
+      table.table.table-striped.table-bordered.table-hover
         thead
-          tr 
-             th 消息名
-             th 简介
-             th 日期
-             th
-             //详细内容隐藏 
+          tr
+              th.text-center 名称
+              th.text-center 内容概要
+              th.text-center 添加日期
+              th 
         tbody
-            each news in newslist 
-                tr
-                    td.name #{news.name}
-                    td.info #{news.info}
-                    td.date #{news.date}
-                    td
-                       i.close.icon
-                       i.edit.icon
-                    td.hidden.content #{news.content}
-                    td.hidden.id #{news._id}
-
-
-
-mixin newsEdit()
-    .ui.fullscreen.modal.news
-        i.close.icon
-        .header
-            p.title 
-        .content
-            .ui.form
-                .ui.two.fields
-                  .field.name
-                      lable 消息标题
-                      input(type='text')
-                  .field.info
-                      lable 简介
-                      input(type='text')
-                .field.date
-                  p 日期
-                .field.content
-                    lable 详细内容
-                    textarea
-        .actions
-            .ui.positive.button 确定
-            .ui.negative.button 取消
+          tr 
+              td.options 
+                span.glyphicon.glyphicon-edit
+                span.glyphicon.glyphicon-remove
+    .editor
+      h3.text-center.text-primary 新闻修改
+      button.btn.btn-primary.save 保存
+      button.btn.btn-default.cancle 取消
+      script#admin-news-editor(name='content', type='text/plain')

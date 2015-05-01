@@ -15,7 +15,8 @@ router.get('/', function(req, res, next) {
 			module: 'carousel',
 			docs: docs,
 			page: {
-				admin: true
+				admin: true,
+				carousel: true
 			}
 		});
 	});
