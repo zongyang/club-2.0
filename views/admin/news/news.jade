@@ -7,17 +7,20 @@ block admin-content
       table.table.table-striped.table-bordered.table-hover
         thead
           tr
-              th.text-center 名称
-              th.text-center 内容概要
+              th.text-center 新闻名称
               th.text-center 添加日期
               th 
         tbody
-          tr 
+          each doc in docs
+            tr
+              td.id.hidden #{doc._id}
+              td.name #{doc.name}
+              td.date #{doc.date}
               td.options 
                 span.glyphicon.glyphicon-edit
                 span.glyphicon.glyphicon-remove
     .editor
-      h3.text-center.text-primary 添加新闻
+      h3.text-center.text-primary 
       button.btn.btn-primary.save 确定
       button.btn.btn-default.cancle 取消
       .input-group

@@ -167,7 +167,7 @@ function addRow(obj) {
 	tr += '<td class="content">' + obj.content + '</td>';
 	tr += '<td><strong><a class="url" href="' + obj.url + '">' + obj.urlName + '</a></strong></td>';
 	tr += '<td><a class="img" href="' + obj.img + '">点击预览</a></td>';
-	tr += '<td class="options"></span><span class="glyphicon glyphicon-remove"></span></td>';
+	tr += '<td class="options"><span class="glyphicon glyphicon-remove"></span></td>';
 	tr += '</tr>';
 	tb.prepend(tr);
 	initOptBtns();
