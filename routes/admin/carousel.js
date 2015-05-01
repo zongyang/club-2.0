@@ -42,7 +42,7 @@ router.post('/insert', multer({
 	},
 	onFIleUploadStart: function(file, req, res) {
 
-		var checkResult = check(req.body);
+		var checkResult = common.checkByType(req.body);
 
 		if (!checkResult.success) {
 			res.send(checkResult);
@@ -146,27 +146,5 @@ router.post('/remove', function(req, res, next) {
 
 
 })
-
-function check(obj, type) {
-
-	if (common.isEmpty(obj.name, obj.urlName, obj.url, obj.content, obj.img))
-		return {
-			success: false,
-			info: '非法操作！'
-		}
-
-	//修改检查
-	if (type)
-		if (obj.id == '')
-			return {
-				success: false,
-				info: '没有id,不能修改！'
-			}
-
-	return {
-		success: true,
-		info: null
-	}
-}
 
 module.exports = router;

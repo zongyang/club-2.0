@@ -17,7 +17,10 @@ block admin-content
                 span.glyphicon.glyphicon-edit
                 span.glyphicon.glyphicon-remove
     .editor
-      h3.text-center.text-primary 新闻修改
-      button.btn.btn-primary.save 保存
+      h3.text-center.text-primary 添加新闻
+      button.btn.btn-primary.save 确定
       button.btn.btn-default.cancle 取消
+      .input-group
+        span.input-group-addon 新闻名称
+        input.form-control.name(type='text')
       script#admin-news-editor(name='content', type='text/plain')
