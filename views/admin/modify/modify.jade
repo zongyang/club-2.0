@@ -1,23 +1,33 @@
-mixin modify()
-    #modify
-        .ui.two.column.grid
-            .column
-                .ui.card.fluid
-                    .content
-                        .header 管理员名修改
-                        .description
-                            +input-place('text','输入新用户名','user','name')
-                    .extra.content
-                        .ui.button.positive.name.ok 确 定
-            .column
-                .ui.card.fluid
-                    .content
-                        .header 密码修改
-                        .description
-                            +input-place('password','输入原密码','keyboard','old')
-                            +input-place('password','输入新密码','keyboard','new')
-                            +input-place('password','密码确认','keyboard','again')
-                    .extra.content
-                        .ui.button.positive.pwd.ok 确 定
-                        .ui.button.negative.pwd.reset 重 置
-       
+extends ../admin
+
+block admin-content
+    #admin-modify
+        .row
+            .col-md-6
+                .panel.panel-primary
+                    .panel-heading 用户名修改
+                    .panel-body 
+                        form.password(role='form')
+                            .form-group
+                                label 用户名
+                                input.form-control.name(type='text', placeholder='用户名')
+                            button.btn.btn-primary.name-ok(type='button') 确定
+                
+                button.btn.btn-danger.logout 注销登陆
+                           
+            .col-md-6
+                .panel.panel-primary
+                    .panel-heading 密码修改
+                    .panel-body
+                        form.password(role='form')
+                            .form-group
+                                label 原密码
+                                input.form-control.old(type='password', placeholder='原密码')
+                            .form-group
+                                label 新密码
+                                input.form-control.new(type='password', placeholder='新密码')
+                            .form-group
+                                label 密码确认
+                                input.form-control.again(type='password', placeholder='密码确认')
+                            button.btn.btn-primary.password-ok(type='button') 确定
+                            button.btn.password-reset(type='button') 重置

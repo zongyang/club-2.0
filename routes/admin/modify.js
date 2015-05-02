@@ -1,126 +1,113 @@
+var express = require('express');
+var router = express.Router();
+var Login = require('../../models/login.js');
 var common = require('../common.js');
-var Login = require('../../models/login');
 
-var router_modify = function(router) {
-	//信息修改页
-	router.get('/admin/modify', function(req, res, next) {
-		var mokuai = 'admin';
-		var path = 'admin/admin';
-		var page = common.pageFlag();
-		var loginFLag = false
-		page.modify = true;
-
-		//已登录
-		if (req.session.user) {
-			loginFLag = true;
+router.get('/', function(req, res, next) {
+	res.render('admin/modify/modify', {
+		module: 'modify',
+		page: {
+			admin: true,
+			modify: true
 		}
-		res.render(path, {
-			mokuai: mokuai,
-			loginFLag: loginFLag,
-			page: page
+	});
+});
+router.get('/logout', function(req, res, next) {
+	if (req.session.user == null) {
+		res.send({
+			success: false,
+			info: '未登录'
+		});
+		return;
+	}
+	req.session.user = null;
+	res.send({
+		success: true,
+		info: '注销成功'
+	});
+});
+router.post('/password', function(req, res, next) {
+	var result = common.checkByType(req.body);
+	if (!result.success) {
+		res.send(result);
+		return;
+	}
+
+	if (req.body.new != req.body.again) {
+		res.send({
+			success: false,
+			info: '两次密码不一致'
 		});
 
-	});
+		return;
+	}
 
-	//密码修改
-	router.post('/admin/modify/pwd', function(req, res, next) {
-		var login = new Login();
-		//检测
-		if (common.isEmpty(req.session.id)) {
-			res.send({
-				success: false,
-				info: '没有提供id!'
-			});
-			return;
-		}
-		if (common.isEmpty(req.body.old)) {
-			res.send({
-				success: false,
-				info: '管理员密码不能为空!'
-			});
-			return;
-		}
-		if (common.isEmpty(req.body.new)) {
-			res.send({
-				success: false,
-				info: '新密码不能为空!'
-			});
-			return;
-		}
-		if (common.isEmpty(req.body.again)) {
-			res.send({
-				success: false,
-				info: '请再次输入新密码!'
-			});
-			return;
-		}
-		if (req.body.new !== req.body.again) {
-			res.send({
-				success: false,
-				info: '两次密码必须一致!'
-			});
-			return;
-		}
-		login.findOne({
-			_id: req.session.user,
-			password: req.body.old
-		}, function(doc) {
-			if (doc == null) {
-				res.send({
-					success: true,
-					info: '原密码不对!'
-				});
-				return;
-			}
-
-			login.findAndModify({
-					_id: req.session.user,
-					password: req.body.old
-				}, {
-					$set: {
-						password: req.body.new
-					}
-				},
-				function() {
-					res.send({
-						success: true,
-						info: '管理员密码修改成功!'
-					});
-				});
+	if (req.body.new.length < 6) {
+		res.send({
+			success: false,
+			info: '密码长度必须大于6'
 		});
-	});
 
+		return;
+	}
+	var login = new Login();
 
-	//管理员名修改
-	router.post('/admin/modify/name', function(req, res, next) {
-		var login = new Login();
-		//检测
-		if (common.isEmpty(req.session.user)) {
+	login.findOne({
+		password: req.body.old
+	}, function(err, doc) {
+		if (doc == null) {
 			res.send({
 				success: false,
-				info: '没有提供id!'
+				info: '修改失败：密码错误'
 			});
 			return;
 		}
-		if (common.isEmpty(req.body.name)) {
-			res.send({
-				success: false,
-				info: '管理员名不能为空!'
-			});
-			return;
-		}
-		login.findAndModify({
-			_id: req.session.user
-		}, {
+
+		login.update({}, {
 			$set: {
-				name: req.body.name
+				password: req.body.new
 			}
-		}, function() {
+		}, function(doc, result) {
 			res.send({
 				success: true,
-				info: '管理员名修改成功!'
+				info: '修改成功！'
 			});
 		});
+
 	});
-}
-module.exports = router_modify;
+
+
+
+});
+router.post('/name', function(req, res, next) {
+	if (common.isEmpty(req.body.name)) {
+		res.send({
+			success: false,
+			info: '用户名不能为空'
+		});
+		return;
+	}
+
+	(new Login()).update({}, {
+		$set: {
+			name: req.body.name
+		}
+	}, function(doc, result) {
+		res.send({
+			success: true,
+			info: '修改成功！'
+		});
+	});
+});
+
+router.get('/get-name', function(req, res, next) {
+	(new Login()).findOne({}, function(err, doc) {
+		doc = (doc) ? doc : {};
+		res.send({
+			success: true,
+			name: doc.name
+		});
+	});
+});
+
+module.exports = router;

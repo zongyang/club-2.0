@@ -1,30 +1,17 @@
-mixin login()
-    #login
-        if loginFLag
-            .login.hidden
-                +input-place('text','管理员名','user','name')
-                +input-place('password','管理员密码','keyboard','password')
-                .buttons
-                    .ui.button.green.ok 确 定
-                    .ui.button.green.reset 重 置
-                    .clear
-            .logined
-                .ui.icon.message
-                    i.student.icon
-                    .content
-                        .header  已登录！
-                .ui.button.logout.green 注销
-        else
-            .login
-                +input-place('text','管理员名','user','name')
-                +input-place('password','管理员密码','keyboard','password')
-                .buttons
-                    .ui.button.green.ok 确 定
-                    .ui.button.green.reset 重 置
-                    .clear
-            .logined.hidden
-                .ui.icon.message
-                    i.student.icon
-                    .content
-                        .header  已登录！
-                .ui.button.logout.green 注销
+extends ../../layout
+block content
+    #admin-login
+        .container
+            .row
+                .col-md-4
+                .col-md-4
+                    form.form-signin
+                        h3.text-primary.text-center 管理员登陆
+                        label.sr-only
+                        input.name.form-control(type='text', placeholder='用户名', required='', autofocus='')
+                        label.sr-only
+                        input.password.form-control(type='password', placeholder='密码', required='')
+                    button.btn.btn-primary.btn-block.login(type='submit') 登陆
+                .col-md-4
+            
+
