@@ -127,7 +127,7 @@ function remove() {
 
 function editorShow(add) {
 	if (add) {
-		$('#admin-news .editor>h3').text('添加新闻');
+		$('#admin-news .editor>h3').text('添加');
 		$('#admin-news .list').fadeOut('slow');
 		$('#admin-news .editor').fadeIn('slow');
 	} else {

@@ -1,0 +1,23 @@
+#admin-news .list > table {
+  margin-top: 15px; }
+#admin-news .list td {
+  vertical-align: middle;
+  text-align: center;
+  min-width: 80px; }
+  #admin-news .list td.options {
+    min-width: 30px; }
+    #admin-news .list td.options span {
+      cursor: pointer; }
+    #admin-news .list td.options span:first-child {
+      margin-right: 5px; }
+#admin-news .editor {
+  display: none; }
+  #admin-news .editor .btn-primary {
+    margin-right: 5px; }
+  #admin-news .editor .input-group {
+    margin-top: 20px; }
+  #admin-news .editor button.save {
+    margin-right: 5px; }
+
+#admin-news-editor {
+  margin-top: 20px; }
