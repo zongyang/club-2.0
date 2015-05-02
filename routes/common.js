@@ -30,7 +30,7 @@ var common = {
 			}
 
 		for (var key in obj) {
-			if (key == 'id')
+			if (key == 'id' || key == '_id')
 				continue;
 			if (this.isEmpty(obj[key]))
 				return {

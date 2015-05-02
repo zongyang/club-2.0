@@ -1,15 +1,6 @@
-mixin introduce()
-    #introduce.ui.fluid.card
-        .content
-            .ui.header.blue 简介修改
-            unless introduce._id
-                .ui.warning.info.message.empty 
-                   i.warning.icon
-                   span 还未添加简介
-            .ui.form.info
-                .field
-                    textarea.info  #{introduce.info}
-                    p.id.hidden #{introduce._id}
-  
-        .extra.content
-            .ui.positive.button.ok 确定
+extends ../admin
+
+block admin-content
+    #admin-introduce
+        button.btn.btn-primary.save 保存
+        script#admin-introduce-editor(name='content', type='text/plain')

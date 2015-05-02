@@ -24,21 +24,20 @@ function getPageObj(type) {
 }
 module.exports = function(router, type) {
 
-	router.get('/'+type, function(req, res, next) {
+	router.get('/' + type, function(req, res, next) {
 		var model = new models[type];
 		model.find({}, {
 			name: true,
 			date: true
 		}, function(err, docs) {
-			res.render('admin/'+type+'/'+type, {
+			res.render('admin/' + type + '/' + type, {
 				module: type,
 				page: getPageObj(type),
 				docs: docs
 			});
 		});
-
 	});
-	router.post('/'+type+'/add', function(req, res, next) {
+	router.post('/' + type + '/add', function(req, res, next) {
 		var checkResult = common.checkByType(req.body);
 
 		if (!checkResult.success) {
@@ -64,7 +63,44 @@ module.exports = function(router, type) {
 				});
 		});
 	})
-	router.post('/'+type+'/edit', function(req, res, next) {
+
+	router.post('/' + type + '/addOrUpdate', function(req, res, next) {
+		if (common.isEmpty(req.body.content)) {
+			res.send({
+				success: false,
+				info: '内容不能为空'
+			})
+			return;
+		}
+
+		var model = new models[type];
+		req.body['date'] = common.getDate();
+
+		model.findOne({}, function(err, doc) {
+			if (doc) //有记录时修改
+				model.update({}, {
+				$set: req.body
+			}, {
+				multi: false
+			}, function(err, result) {
+				res.send({
+					success: true,
+					info: '修改成功'
+				});
+			});
+
+			else //没有记录时添加
+				model.insert(req.body, function(err, doc) {
+				res.send({
+					success: true,
+					info: '修改成功'
+				});
+			})
+
+		});
+	});
+
+	router.post('/' + type + '/edit', function(req, res, next) {
 		var checkResult = common.checkByType(req.body, true);
 
 		if (!checkResult.success) {
@@ -95,7 +131,7 @@ module.exports = function(router, type) {
 			}
 		});
 	});
-	router.post('/'+type+'/remove', function(req, res, next) {
+	router.post('/' + type + '/remove', function(req, res, next) {
 		var model = new models[type];
 		model.remove({
 			_id: ObjectId(req.body.id)
@@ -113,7 +149,7 @@ module.exports = function(router, type) {
 			}
 		});
 	});
-	router.get('/'+type+'/getContent', function(req, res, next) {
+	router.get('/' + type + '/getContent', function(req, res, next) {
 		var obj = {
 			_id: ObjectId(req.query.id)
 		};
@@ -134,6 +170,22 @@ module.exports = function(router, type) {
 					success: true,
 					content: doc.content
 				});
+		});
+	});
+	router.get('/' + type + '/findOne', function(req, res, next) {
+
+		var model = new models[type];
+		model.findOne({}, function(err, doc) {
+			if (err)
+				res.send({
+					success: false,
+					info: err
+				})
+
+			res.send({
+				success: true,
+				doc: doc
+			});
 		});
 	});
 

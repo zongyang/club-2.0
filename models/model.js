@@ -15,17 +15,11 @@ function Model(collectionName) {
     this.collection = db.collection(collectionName);
 }
 
-['insert', 'find', 'findOne', 'remove'].forEach(function(method) {
+['insert', 'find', 'findOne', 'remove','save','update'].forEach(function(method) {
     Model.prototype[method] = function() {
         this.collection[method].apply(this.collection, arguments);
     }
 })
-
-Model.prototype.update = function(query, setVal, callback) {
-    this.collection.update(query, setVal, function(err, doc) {
-        callback(err, doc);
-    });
-}
 Model.prototype.close = function() {
     this.db.close();
 }
