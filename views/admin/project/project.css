@@ -12,6 +12,8 @@
       margin-right: 5px; }
 #admin-news .editor {
   display: none; }
+  #admin-news .editor form {
+    margin-top: 10px; }
   #admin-news .editor .btn-primary {
     margin-right: 5px; }
   #admin-news .editor .input-group {

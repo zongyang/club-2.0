@@ -42,6 +42,7 @@ function setOptionTag(type) {
 
 function setEditorContentByActiveTr(callabck) {
 	var id = $('#admin-news .list .active .id').text();
+	
 	$.ajax({
 		type: 'get',
 		url: 'getContent',
@@ -62,14 +63,17 @@ function setEditorContentByActiveTr(callabck) {
 function save() {
 	var type = ($('.editor .save').hasClass('edit')) ? 'edit' : 'add';
 	var name = $('#admin-news .editor .name').val();
+	var intro = $('#admin-news .editor .intro').val();
 	var content = UE.getEditor('admin-news-editor').getContent();
 	var id = $('#admin-news .list .active .id').text();
 	var data = (type == 'edit') ? {
 		content: content,
+		intro:intro,
 		name: name,
 		id: id
 	} : {
 		content: content,
+		intro:intro,
 		name: name
 	}
 
@@ -80,6 +84,10 @@ function save() {
 
 	if (content == '') {
 		modalShow('提示', '内容不能为空');
+		return;
+	}
+	if (intro == '') {
+		modalShow('提示', '简介不能为空');
 		return;
 	}
 	if (type == 'edit' && id == '') {
@@ -95,10 +103,12 @@ function save() {
 		success: function(response) {
 			if (response.success) {
 				editorHide();
-				if (type == 'edit')
+				if (type == 'edit'){
 					$('#admin-news .list .active .name').text(name)
+					$('#admin-news .list .active .intro').text(intro)
+				}
 				else
-					addRow(response.id, name, response.date);
+					addRow(response.id, name, intro,response.date);
 				return;
 			};
 			modalShow('提示', response.info);
@@ -128,15 +138,17 @@ function remove() {
 function editorShow(add) {
 	if (add) {
 		$('#admin-news .editor>h3').text('添加');
-		$('#admin-news .list').fadeOut('slow');
-		$('#admin-news .editor').fadeIn('slow');
+		$('#admin-news .list').hide('slow');
+		$('#admin-news .editor').show('slow');
 	} else {
 		setEditorContentByActiveTr(function() {
 			var name=$('#admin-news .list .active .name').text();
+			var intro=$('#admin-news .list .active .intro').text();
 			$('#admin-news .editor>h3').text('修改 ' + name);
 			$('#admin-news .editor .name').val(name);
-			$('#admin-news .list').fadeOut('slow');
-			$('#admin-news .editor').fadeIn('slow');
+			$('#admin-news .editor intro').val(intro);
+			$('#admin-news .list').hide('slow');
+			$('#admin-news .editor').show('slow');
 
 		});
 
@@ -146,17 +158,18 @@ function editorShow(add) {
 }
 
 function editorHide() {
-	$('#admin-news .list').fadeIn('slow');
-	$('#admin-news .editor').fadeOut('slow');
+	$('#admin-news .list').show('slow');
+	$('#admin-news .editor').hide('slow');
 	$('#admin-news .editor .name').val('');
 	UE.getEditor('admin-news-editor').execCommand('cleardoc');;
 }
 
-function addRow(id, name, date) {
+function addRow(id, name, intro,date) {
 	var tb = $('#admin-news .list tbody');
 	var tr = '<tr class="success">';
 	tr += '<td class="id hidden">' + id + '</td>';
 	tr += '<td class="name">' + name + '</td>';
+	tr += '<td class="intro">' + intro + '</td>';
 	tr += '<td class="date">' + date + '</td>';
 	tr += '<td class="options"><span class="glyphicon glyphicon-edit"></span><span class="glyphicon glyphicon-remove"></span></td>';
 	tr += '</tr>';

@@ -1,3 +1,5 @@
+
+
 function modalShow(title, info, ok, cancle) {
 	var m = $('#modal');
 	m.find('.title').text(title);

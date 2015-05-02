@@ -21,3 +21,14 @@
 /*btn margin */
 .carousel-caption p .btn:nth-child(n+2) {
   margin-left: 10px; }
+
+#main-content .panel .panel-heading {
+  font-weight: bold;
+  font-size: 18px;
+  color: #337ab7; }
+#main-content .panel li {
+  ttransition: background 1s;
+  -webkit-transition: background 1s; }
+#main-content .panel li:hover {
+  cursor: pointer;
+  background: #f5f5f5; }

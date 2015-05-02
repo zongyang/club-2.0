@@ -8,6 +8,7 @@ block admin-content
         thead
           tr
               th.text-center 名称
+              th.text-center 内容简介
               th.text-center 添加日期
               th 
         tbody
@@ -15,6 +16,7 @@ block admin-content
             tr
               td.id.hidden #{doc._id}
               td.name #{doc.name}
+              td.intro #{doc.intro}
               td.date #{doc.date}
               td.options 
                 span.glyphicon.glyphicon-edit
@@ -23,7 +25,11 @@ block admin-content
       h3.text-center.text-primary 
       button.btn.btn-primary.save 确定
       button.btn.btn-default.cancle 取消
-      .input-group
-        span.input-group-addon 名称
-        input.form-control.name(type='text')
+      form(role='form')
+        .form-group
+          label 名称
+          input.form-control.name(type='text', placeholder='请输入名称')
+        .form-group
+          label 简介
+          textarea.form-control.intro(rows='3',placeholder='详细内容')  
       script#admin-news-editor(name='content', type='text/plain')

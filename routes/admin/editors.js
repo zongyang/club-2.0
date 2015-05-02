@@ -27,8 +27,7 @@ module.exports = function(router, type) {
 	router.get('/' + type, function(req, res, next) {
 		var model = new models[type];
 		model.find({}, {
-			name: true,
-			date: true
+			content: false
 		}, function(err, docs) {
 			res.render('admin/' + type + '/' + type, {
 				module: type,
@@ -115,6 +114,7 @@ module.exports = function(router, type) {
 		}, {
 			$set: {
 				name: req.body.name,
+				intro: req.body.intro,
 				content: req.body.content
 			}
 		}, function(err, result) {

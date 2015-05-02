@@ -49,28 +49,13 @@ html(lang='zh-CN')
             #navbar.navbar-collapse.collapse
               ul.nav.navbar-nav
                 li.active
-                  a(href='#') 主页
+                  a(href='/') 主页
                 li
-                  a(href='#about') 社团简介
+                  a(href='/introduce') 社团简介
                 li
-                  a(href='#contact') 人员组成
-                li.dropdown
-                  a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
-                    | 报名 
-                    span.caret
-                  ul.dropdown-menu(role='menu')
-                    li
-                      a(href='#') Action
-                    li
-                      a(href='#') Another action
-                    li
-                      a(href='#') Something else here
-                    li.divider
-                    li.dropdown-header Nav header
-                    li
-                      a(href='#') Separated link
-                    li
-                      a(href='#') One more separated link
+                  a(href='/member') 人员组成
+                li
+                  a(href='register') 报名入口
     
     block content
 
@@ -97,6 +82,7 @@ html(lang='zh-CN')
     script(type='text/javascript' src='/bower_components/ie10-viewport-bug-workaround.js')
 
     script(type='text/javascript' src='/layout.js')
+    script(type='text/javascript' src='/ueditor/ueditor.parse.min.js')
     if page.admin
       // 编辑器配置文件
       script(type='text/javascript', src='/ueditor/ueditor.config.js')

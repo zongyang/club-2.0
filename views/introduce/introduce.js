@@ -1,7 +1,7 @@
 $(function() {
 	$.ajax({
 		type: 'get',
-		url: '/get-member-content',
+		url: '/get-introduce-content',
 		success: function(res) {
 			if (res.content)
 				$('#content').append(res.content)

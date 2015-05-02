@@ -25,33 +25,27 @@ block content
         span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
         span.sr-only Next
 
-    .container
+    #main-content.container
       .row
-        .col-md-6.news
-          h2
-            | 新闻
-          hr
-          ul
-            li 
-              a(href='#') 陈云贤副省长到视频图像智能分析与应用技术公安部重点实验室调研指导工作
-            li 
-              a(href='#')  陈云贤副省长到视频图像智能分析与应用技术公安部重点实验室调研指导工作
-            li 
-              a(href='#') 陈云贤副省长到视频图像智能分析与应用技术公安部重点实验室调研指导工作
-        .col-md-6.projects
-          h2
-            | 项目
-          hr
-          h4 项目一
-          p
-            | 长期从事计算机图形图像处理、多媒体技术、视频编码、嵌入式图形图像处理、移动计算等方面的研究工作。目前研究课题包括H.264视频编码、图像检索、图像矢量化等。
-          hr
-          h4 项目一
-          p
-            | 长期从事计算机图形图像处理、多媒体技术、视频编码、嵌入式图形图像处理、移动计算等方面的研究工作。目前研究课题包括H.264视频编码、图像检索、图像矢量化等。
-          hr
-          h4 项目一
-          p
-            | 长期从事计算机图形图像处理、多媒体技术、视频编码、嵌入式图形图像处理、移动计算等方面的研究工作。目前研究课题包括H.264视频编码、图像检索、图像矢量化等。
+        .col-md-5
+          .panel.panel-default
+            .panel-heading 新闻
+            ul.list-group.news
+              each news in newses 
+                li.list-group-item(data-id='#{news._id}')
+                  strong
+                    em #{news.name}
+                  p
+                  p #{news.intro}
+        .col-md-7
+          .panel.panel-default
+            .panel-heading项目
+            ul.list-group.project
+              each project in projects 
+                li.list-group-item(data-id='#{project._id}') 
+                  strong
+                    em #{project.name}
+                  p
+                  p #{project.intro}
 
-            
+        
