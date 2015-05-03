@@ -26,9 +26,7 @@ module.exports = function(router, type) {
 
 	router.get('/' + type, function(req, res, next) {
 		var model = new models[type];
-		model.find({}, {
-			content: false
-		}, function(err, docs) {
+		model.sortByDate(function(err, docs) {
 			res.render('admin/' + type + '/' + type, {
 				module: type,
 				page: getPageObj(type),

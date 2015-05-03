@@ -10,7 +10,7 @@ var supportImages = ['image/gif', 'image/jpeg', 'image/png'];
 
 router.get('/', function(req, res, next) {
 	var carousel = new Carousel();
-	carousel.find({}, function(err, docs) {
+	carousel.sortByDate(function(err, docs) {
 		res.render('admin/carousel/carousel', {
 			module: 'carousel',
 			docs: docs,
@@ -83,6 +83,7 @@ router.post('/insert', function(req, res, next) {
 	req.body.img = req.files['img'][0].path;
 
 	var carousel = new Carousel();
+	req.body['date'] = common.getDate();
 	//插入数据库
 	carousel.insert(req.body, function(err, doc) {
 		if (err) {
@@ -92,6 +93,7 @@ router.post('/insert', function(req, res, next) {
 			});
 			return;
 		}
+		carousel.delPathPrefix(doc);
 		res.send({
 			success: true,
 			id: doc._id,

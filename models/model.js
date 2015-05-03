@@ -15,11 +15,22 @@ function Model(collectionName) {
     this.collection = db.collection(collectionName);
 }
 
-['insert', 'find', 'findOne', 'remove','save','update'].forEach(function(method) {
+['insert', 'find', 'findOne', 'remove', 'save', 'update'].forEach(function(method) {
     Model.prototype[method] = function() {
         this.collection[method].apply(this.collection, arguments);
     }
 })
+
+//按时间的倒序输出
+Model.prototype.sortByDate = function(callback) {
+    this.collection.find({}, {
+        content: false
+    }).sort({
+        date: -1
+    }, function(err, docs) {
+        callback(err, docs);
+    })
+}
 Model.prototype.close = function() {
     this.db.close();
 }

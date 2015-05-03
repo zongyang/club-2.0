@@ -9,5 +9,4 @@ function News(shopId, address) {
 util.inherits(News, Model);
 //子类定义的原型属性放在这个后面，不然会被覆盖
 
-
 module.exports = News;

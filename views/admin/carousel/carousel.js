@@ -3,9 +3,6 @@ $(function() {
 	$('.add-carousel').click(function() {
 		carouselModalShow(null, sendAddRequest);
 	});
-	$('#admin-carousel .scan a').tooltip({
-		html: true
-	}).tooltip('show').tooltip('hide');
 })
 
 function initOptBtns() {
@@ -15,6 +12,10 @@ function initOptBtns() {
 		tr.addClass('active').siblings().removeClass('active');
 		modalShow('提示', '是否要删除 ' + name + ' ?', sendRemoveRequest);
 	});
+
+	$('#admin-carousel .scan a').tooltip({
+		html: true
+	}).tooltip('show').tooltip('hide');
 }
 
 function carouselModalShow(obj, ok, cancle) {
@@ -169,7 +170,7 @@ function addRow(obj) {
 	tr += '<td class="name">' + obj.name + '</td>';
 	tr += '<td class="content">' + obj.content + '</td>';
 	tr += '<td><strong><a class="url" href="' + obj.url + '">' + obj.urlName + '</a></strong></td>';
-	tr += '<td><a class="img" href="' + obj.img + '">点击预览</a></td>';
+	tr += '<td><div class="scan"><a href="#" data-tooltip="tooltip" title="" data-original-title="<img class=\'scan-tip\' src=\'' + obj.img + '\'></img>">预览</a></div></td>';
 	tr += '<td class="options"><span class="glyphicon glyphicon-remove"></span></td>';
 	tr += '</tr>';
 	tb.prepend(tr);

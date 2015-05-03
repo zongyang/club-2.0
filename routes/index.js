@@ -13,25 +13,20 @@ router.get('/', function(req, res, next) {
     var news = new News();
     var project = new Project();
 
-    carousel.find({}, function(err1, carousels) {
-        news.find({}, {
-            content: false
-        }, function(err2, newses) {
-            project.find({}, {
-                    content: false
-                },
-                function(err3, projects) {
-                    res.render('index/index', {
-                        module: 'index',
-                        carousels: carousels,
-                        newses: newses,
-                        projects: projects,
-                        page: {
-                            admin: false,
-                            index: true
-                        }
-                    })
+    carousel.sortByDate(function(err1, carousels) {
+        news.sortByDate(function(err2, newses) {
+            project.sortByDate(function(err3, projects) {
+                res.render('index/index', {
+                    module: 'index',
+                    carousels: carousels,
+                    newses: newses,
+                    projects: projects,
+                    page: {
+                        admin: false,
+                        index: true
+                    }
                 })
+            })
         })
     })
 })

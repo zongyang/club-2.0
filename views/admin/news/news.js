@@ -137,16 +137,19 @@ function remove() {
 
 function editorShow(add) {
 	if (add) {
+		$('#admin-news .editor .name').val('');
+		$('#admin-news .editor .intro').val('');
 		$('#admin-news .editor>h3').text('添加');
 		$('#admin-news .list').hide('slow');
 		$('#admin-news .editor').show('slow');
+		UE.getEditor('admin-news-editor').execCommand('cleardoc');
 	} else {
 		setEditorContentByActiveTr(function() {
 			var name=$('#admin-news .list .active .name').text();
 			var intro=$('#admin-news .list .active .intro').text();
 			$('#admin-news .editor>h3').text('修改 ' + name);
 			$('#admin-news .editor .name').val(name);
-			$('#admin-news .editor intro').val(intro);
+			$('#admin-news .editor .intro').val(intro);
 			$('#admin-news .list').hide('slow');
 			$('#admin-news .editor').show('slow');
 
@@ -160,8 +163,6 @@ function editorShow(add) {
 function editorHide() {
 	$('#admin-news .list').show('slow');
 	$('#admin-news .editor').hide('slow');
-	$('#admin-news .editor .name').val('');
-	UE.getEditor('admin-news-editor').execCommand('cleardoc');;
 }
 
 function addRow(id, name, intro,date) {

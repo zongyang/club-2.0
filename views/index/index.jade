@@ -1,20 +1,19 @@
 extends ../layout
 block content
     
-    #carousel.carousel.slide(data-ride='carousel')
+    #carousel.carousel.slide 
       // Indicators
       ol.carousel-indicators
-        -for(var i=0;i<carousels.length;i++)
-          li(data-target='#carousel', data-slide-to='#{i}')
+        each carousel in carousels
+          li.circle(data-target='#carousel')
       .carousel-inner(role='listbox')
         each carousel in carousels
           .item
-            img.first-slide(src='#{carousel.img}', alt='First slide')
+            img.first-slide(src='#{carousel.img}', alt='#{carousel.name}')
             .container
               .carousel-caption
                 h1 #{carousel.name}
-                p #{carousel.content}
-                  
+                p #{carousel.content}  
                 p
                   a.btn.btn-primary(href='#{carousel.url}', role='button') #{carousel.name}
         
@@ -49,3 +48,7 @@ block content
                   p #{project.intro}
 
         
+
+
+
+        //(data-ride='carousel')
