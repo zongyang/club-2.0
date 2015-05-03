@@ -1,11 +1,11 @@
 $(function() {
-	initOptBtns();
+	init();
 	$('.add-carousel').click(function() {
 		carouselModalShow(null, sendAddRequest);
 	});
 })
 
-function initOptBtns() {
+function init() {
 	$('#admin-carousel table .options .glyphicon-remove ').unbind('click').bind('click', function() {
 		var tr = $(this).parent().parent();
 		var name = tr.find('.name').text();
@@ -40,7 +40,7 @@ function carouselModalShow(obj, ok, cancle) {
 	modal.find('.ok').unbind('click').bind('click', function() {
 		if (ok)
 			ok();
-		modal.modal('hide');
+		//modal.modal('hide');
 	})
 	modal.find('.cancle').unbind('click').bind('click', function() {
 		if (cancle)
@@ -117,6 +117,8 @@ function sendAddRequest() {
 		return;
 	}
 
+	modal.modal('hide');
+	
 	var file = $('#admin-carousel-modal .img')[0].files[0];
 	var fd = new FormData();
 	var vals = getVals();
@@ -174,5 +176,5 @@ function addRow(obj) {
 	tr += '<td class="options"><span class="glyphicon glyphicon-remove"></span></td>';
 	tr += '</tr>';
 	tb.prepend(tr);
-	initOptBtns();
+	init();
 }
