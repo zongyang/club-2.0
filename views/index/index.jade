@@ -1,7 +1,7 @@
 extends ../layout
 block content
     
-    #carousel.carousel.slide 
+    #carousel.carousel.slide(data-ride='carousel')
       // Indicators
       ol.carousel-indicators
         each carousel in carousels
@@ -46,9 +46,3 @@ block content
                     em #{project.name}
                   p
                   p #{project.intro}
-
-        
-
-
-
-        //(data-ride='carousel')
