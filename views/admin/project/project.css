@@ -4,12 +4,12 @@
   vertical-align: middle;
   text-align: center;
   min-width: 80px; }
-  #admin-news .list td.options {
-    min-width: 30px; }
-    #admin-news .list td.options span {
-      cursor: pointer; }
-    #admin-news .list td.options span:first-child {
-      margin-right: 5px; }
+  #admin-news .list td.intro {
+    text-align: left; }
+  #admin-news .list td.options span {
+    cursor: pointer; }
+  #admin-news .list td.options span:first-child {
+    margin-right: 5px; }
 #admin-news .editor {
   display: none; }
   #admin-news .editor form {

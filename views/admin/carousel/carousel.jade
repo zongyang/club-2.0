@@ -22,7 +22,9 @@ block admin-content
                         strong
                           a.url(href='#{doc.url}') #{doc.urlName}
                     td 
-                        a.img(href='#{doc.img}') 预览
+                      .scan
+                        a(href='#',data-tooltip='tooltip',title="<img class='scan-tip' src='#{doc.img}'></img>") 预览
+                      //a.img(href='#{doc.img}') 预览
                     td.options 
                         //span.glyphicon.glyphicon-edit
                         span.glyphicon.glyphicon-remove

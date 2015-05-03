@@ -7,19 +7,20 @@ var carousel = require('./carousel.js');
 var index = require('./index.js');
 
 
-router.use('/login', login);
-
-/*router.use('/*', function(req, res, next) {
-	console.log(req.path)
-	if (req.session.user != null) {
-		next();
+router.use('/', function(req, res, next) {
+	var reg = /^\/login/; //登陆时不需要验证
+	if (!reg.test(req.path)) {
+		if (req.session.user != null) {
+			next();
+		} else {
+			req.flash('error', '未登陆');
+			res.redirect('/admin/login');
+		}
 	} else {
-		console.log('meiyou')
-		req.flash('error','未登陆');
-		res.redirect('/admin/');
+		next();
 	}
-})*/
-
+})
+router.use('/login', login);
 router.use('/index', index);
 router.use('/carousel', carousel);
 router.use('/modify', modify);

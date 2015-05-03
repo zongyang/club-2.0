@@ -11,3 +11,10 @@
     min-width: 30px; }
     #admin-carousel > table td.options span {
       cursor: pointer; }
+#admin-carousel .scan-tip {
+  width: 100%;
+  border-radius: 5px; }
+#admin-carousel .tooltip-inner {
+  padding: 0;
+  max-width: 300px;
+  background-color: #fff; }

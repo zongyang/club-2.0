@@ -1,3 +1,21 @@
+mixin index-li(active,href,text,icon)
+  if page.admin
+    li
+      a.text-center(href='#{href}')
+        span.glyphicon(class=icon)
+        |  #{text}
+  else
+    if active
+      li.active
+        a.text-center(href='#{href}')
+          span.glyphicon(class=icon)
+          |  #{text}
+    else
+      li
+        a.text-center(href='#{href}')
+          span.glyphicon(class=icon)
+          |  #{text}
+
 doctype html
 html(lang='zh-CN')
   head
@@ -34,7 +52,7 @@ html(lang='zh-CN')
           .modal-footer
             button.btn.btn-default.cancle(data-dismiss='modal', aria-hidden='true') 取消
             button.btn.btn-primary.ok 确定
-
+    
     nav.navbar-wrapper
       .container
         nav.navbar.navbar-inverse.navbar-static-top
@@ -48,15 +66,10 @@ html(lang='zh-CN')
               a.navbar-brand(href='#') 中山大学智能硬件和数据分析俱乐部
             #navbar.navbar-collapse.collapse
               ul.nav.navbar-nav
-                li.active
-                  a(href='/') 主页
-                li
-                  a(href='/introduce') 社团简介
-                li
-                  a(href='/member') 人员组成
-                li
-                  a(href='register') 报名入口
-    
+                +index-li(page.index,'/','主页','glyphicon-home')
+                +index-li(page.introduce,'/introduce','社团简介','glyphicon-education')
+                +index-li(page.member,'/member','人员组成','glyphicon-user')
+                +index-li(page.register,'/register','报名入口','glyphicon-registration-mark') 
     block content
 
     // FOOTER
@@ -93,4 +106,3 @@ html(lang='zh-CN')
     else
       script(type='text/javascript' src='/#{module}/#{module}.js')
 
-      

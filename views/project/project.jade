@@ -1,0 +1,7 @@
+extends ../layout
+block content
+    #project.container
+        h2.text-center.text-primary #{doc.name} 
+        p.text-right (#{doc.date})
+        hr
+        #content #{doc.content}

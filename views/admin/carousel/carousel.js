@@ -3,6 +3,9 @@ $(function() {
 	$('.add-carousel').click(function() {
 		carouselModalShow(null, sendAddRequest);
 	});
+	$('#admin-carousel .scan a').tooltip({
+		html: true
+	}).tooltip('show').tooltip('hide');
 })
 
 function initOptBtns() {
@@ -33,13 +36,12 @@ function carouselModalShow(obj, ok, cancle) {
 	modal.find('.img').val('');
 
 
-	modal.find('.ok').click(function() {
+	modal.find('.ok').unbind('click').bind('click', function() {
 		if (ok)
 			ok();
 		modal.modal('hide');
 	})
-
-	modal.find('.cancle').click(function() {
+	modal.find('.cancle').unbind('click').bind('click', function() {
 		if (cancle)
 			cancle();
 	})
@@ -107,6 +109,7 @@ function check() {
 }
 
 function sendAddRequest() {
+	var modal = $('#admin-carousel-modal');
 	var checkResult = check();
 	if (!checkResult.success) {
 		alertShow(checkResult.info, modal.find('form'));
