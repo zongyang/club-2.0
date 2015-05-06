@@ -30,7 +30,6 @@ router.post('/insert', multer({
 		return Date.now();
 	},
 	changeDest: function(dest, req, res) {
-		var obj = req.body;
 		if (!fs.existsSync(dest)) {
 			fs.mkdirSync(dest);
 		}
@@ -40,14 +39,7 @@ router.post('/insert', multer({
 		files: 1,
 		fileSize: 10 * 1024 * 1024 //10MB
 	},
-	onFIleUploadStart: function(file, req, res) {
-
-		var checkResult = common.checkByType(req.body);
-
-		if (!checkResult.success) {
-			res.send(checkResult);
-			return;
-		}
+	onFileUploadStart: function(file, req, res) {
 
 		if (supportImages.indexOf(file.mimetype) == -1) {
 			console.log('not support type');
@@ -80,6 +72,17 @@ router.post('/insert', multer({
 }));
 
 router.post('/insert', function(req, res, next) {
+	if (res.finished) {
+		return
+	}
+
+	var checkResult = common.checkByType(req.body);
+
+	if (!checkResult.success) {
+		res.send(checkResult);
+		return false;
+	}
+
 	req.body.img = req.files['img'][0].path;
 
 	var carousel = new Carousel();
@@ -93,7 +96,7 @@ router.post('/insert', function(req, res, next) {
 			});
 			return;
 		}
-		carousel.delPathPrefix(doc);
+		carousel.delPathPrefix([doc],'img');
 		res.send({
 			success: true,
 			id: doc._id,
@@ -101,7 +104,6 @@ router.post('/insert', function(req, res, next) {
 		});
 	})
 });
-
 
 
 router.post('/remove', function(req, res, next) {

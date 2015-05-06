@@ -4,6 +4,11 @@ var Login = require('../../models/login.js');
 var common = require('../common.js');
 
 router.get('/', function(req, res, next) {
+	if (req.session.user != null) {
+		res.redirect('/admin/index');
+		return
+	}
+	
 	res.render('admin/login/login', {
 		module: 'login',
 		page: {
@@ -14,7 +19,6 @@ router.get('/', function(req, res, next) {
 })
 
 router.post('/login', function(req, res, next) {
-
 	if (common.isEmpty(req.body.name, req.body.password)) {
 		res.send({
 			success: false,

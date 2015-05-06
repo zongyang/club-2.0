@@ -31,8 +31,18 @@ Model.prototype.sortByDate = function(callback) {
         callback(err, docs);
     })
 }
+Model.prototype.delPathPrefix=function(docs,property) {
+    var pos;
+    docs.forEach(function(doc) {
+        pos = doc[property].indexOf('/');
+        doc[property] = doc[property].substr(pos);
+    });
+}
+
 Model.prototype.close = function() {
     this.db.close();
 }
+
+
 
 module.exports = Model;

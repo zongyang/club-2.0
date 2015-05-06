@@ -1,4 +1,57 @@
 extends ../layout
 block content
     #register.container
-        p.text-primary 正在建设中。。
+        .row
+            .col-md-3
+            .col-md-6
+                form(role='form')
+                    .form-group
+                        label 姓名
+                        input.form-control.name(type='text',palceholder='输入姓名',autofocus,required )
+                    .form-group
+                        label 学号
+                        input.form-control.no(type='text',palceholder='输入学号',required)
+                    .form-group
+                        label 学院
+                        input.form-control.acadamy(type='text',palceholder='输入学院',required)
+                    .form-group
+                        label 专业
+                        input.form-control.profession(type='text',palceholder='输入专业',required)
+                    .form-group
+                        label 电话
+                        input.form-control.phone(type='text',palceholder='输入电话',required)
+                    .form-group
+                        label Email
+                        input.form-control.email(type='email',palceholder='输入电话',required)
+                    .form-group
+                        label 简历
+                        input.resume(type='file',required)
+                button.btn.btn-primary.submit 提交
+
+                table.table.table-striped.table-hover.hidden
+                    caption.text-primary 报名成功
+                    tbody
+                            tr
+                                td 姓名
+                                td 
+                            tr
+                                td 学号
+                                td 
+                            tr
+                                td 学院
+                                td 
+                            tr
+                                td 专业
+                                td 
+                            tr
+                                td 电话
+                                td 
+                            tr
+                                td Email
+                                td 
+                            tr
+                                td 简历
+                                td.td-resume
+                button.btn.btn-primary.again.hidden 继续报名
+            .col-md-3
+            
