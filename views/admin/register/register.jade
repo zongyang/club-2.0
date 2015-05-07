@@ -1,0 +1,36 @@
+extends ../admin
+
+block admin-content
+  #admin-register
+    .switch
+      label.text-primary 报名入口开关:
+      if _switch
+        input(type='checkbox',checked)
+      else
+        input(type='checkbox')
+    .list
+      table.table.table-striped.table-bordered.table-hover
+        thead
+          tr
+              th.text-center 姓名
+              th.text-center 学号
+              th.text-center 学院/专业
+              th.text-center 项目
+              th.text-center 电话
+              th.text-center Email
+              th.text-center 
+              th.text-center 
+        tbody
+          each doc in docs
+            tr
+              td.id.hidden #{doc._id}
+              td.name #{doc.name}
+              td.no #{doc.no}
+              td.acadamy #{doc.acadamy} / #{doc.profession} 
+              td.project #{doc.project}
+              td.phone #{doc.phone}
+              td.email #{doc.email}
+              td.resume 
+                a(href='download?file=#{doc.resume}') 简历
+              td.options 
+                span.glyphicon.glyphicon-remove

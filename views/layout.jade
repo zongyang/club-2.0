@@ -27,6 +27,8 @@ html(lang='zh-CN')
     title 中山大学智能硬件和数据分析俱乐部
     link(rel='icon',href='http://v3.bootcss.com/favicon.ico')
     link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/bower_components/bootstrap-combobox/css/bootstrap-combobox.css')
+    link(rel='stylesheet', href='/bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css')
     link(rel='stylesheet', href='/layout.css')
     if page.admin
       link(rel='stylesheet',href='/admin/admin.css')
@@ -69,7 +71,8 @@ html(lang='zh-CN')
                 +index-li(page.index,'/','主页','glyphicon-home')
                 +index-li(page.introduce,'/introduce','社团简介','glyphicon-education')
                 +index-li(page.member,'/member','人员组成','glyphicon-user')
-                +index-li(page.register,'/register','报名入口','glyphicon-registration-mark') 
+                if _switch
+                  +index-li(page.register,'/register','报名入口','glyphicon-registration-mark') 
     block content
 
     // FOOTER
@@ -91,6 +94,9 @@ html(lang='zh-CN')
     // Placed at the end of the document so the pages load faster
     script(type='text/javascript' src='/bower_components/jquery/dist/jquery.min.js')
     script(type='text/javascript' src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+    //plugins
+    script(type='text/javascript' src='/bower_components/bootstrap-combobox/js/bootstrap-combobox.js')
+    script(type='text/javascript' src='/bower_components/bootstrap-switch/dist/js/bootstrap-switch.min.js')
     // IE10 viewport hack for Surface/desktop Windows 8 bug
     script(type='text/javascript' src='/bower_components/ie10-viewport-bug-workaround.js')
 

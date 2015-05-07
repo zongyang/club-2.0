@@ -1,9 +1,11 @@
 $(function() {
+
 	$('#register .submit').click(add);
 	$('#register .again').click(function() {
 		initVals()
 		viewTogle()
 	});
+	initCombobox();
 })
 
 function add() {
@@ -46,7 +48,8 @@ function getVals() {
 		acadamy: $('#register .acadamy').val(),
 		profession: $('#register .profession').val(),
 		phone: $('#register .phone').val(),
-		email: $('#register .email').val()
+		email: $('#register .email').val(),
+		project: $('#register .project').val()
 	}
 }
 
@@ -62,13 +65,17 @@ function initVals() {
 
 function setTableVals(obj) {
 	var index = 0;
-	var tds = $('#register table td:odd').not('.td-resume');
+	var tb = $('#register table')
 
-	for (var key in obj) {
-		$(tds[index]).text(obj[key]);
-		index++;
-	}
-	$('#register .td-resume').html('<a href="'+obj.resume+'" target="_blank">简历</a>')
+	tb.find('.td-name').text(obj.name)
+	tb.find('.td-no').text(obj.no)
+	tb.find('.td-acadamy').text(obj.acadamy)
+	tb.find('.td-profession').text(obj.profession)
+	tb.find('.td-project').text(obj.project)
+	tb.find('.td-phone').text(obj.phone)
+	tb.find('.td-email').text(obj.email)
+
+	$('#register .td-resume').html('<a href="' + obj.resume + '" target="_blank">简历</a>')
 }
 
 function check() {
@@ -108,6 +115,11 @@ function check() {
 			success: false,
 			info: '简历不能为空'
 		}
+	if (comboboxVals[$('#register .project').val()] == undefined)
+		return {
+			success: false,
+			info: '请选择正确的项目'
+		}
 
 	var regEmail = /^\w+@\w+\.\w+$/
 	var regNo = /^\d{8,}$/
@@ -141,3 +153,16 @@ function viewTogle() {
 	$('#register table').toggleClass('hidden');
 	$('#register .again').toggleClass('hidden');
 }
+
+function initCombobox() {
+	var box = $('#register .combobox');
+	box.find('option').each(function(index, option) {
+		var val = $(option).val()
+		if (val != '') {
+			comboboxVals[$(option).text()] = val
+		}
+	});
+	box.combobox();
+}
+
+var comboboxVals = {};

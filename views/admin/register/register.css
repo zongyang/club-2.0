@@ -1,0 +1,14 @@
+#admin-register .switch label {
+  margin-right: 10px; }
+#admin-register .table {
+  margin-top: 20px; }
+  #admin-register .table td {
+    vertical-align: middle;
+    min-width: 80px; }
+    #admin-register .table td.resume {
+      text-align: center; }
+    #admin-register .table td.options {
+      text-align: center;
+      min-width: 30px; }
+      #admin-register .table td.options span {
+        cursor: pointer; }

@@ -7,22 +7,31 @@ block content
                 form(role='form')
                     .form-group
                         label 姓名
-                        input.form-control.name(type='text',palceholder='输入姓名',autofocus,required )
+                        input.form-control.name(type='text',placeholder='输入姓名',autofocus,required )
                     .form-group
                         label 学号
-                        input.form-control.no(type='text',palceholder='输入学号',required)
+                        input.form-control.no(type='text',placeholder='输入学号',required)
                     .form-group
                         label 学院
-                        input.form-control.acadamy(type='text',palceholder='输入学院',required)
+                        input.form-control.acadamy(type='text',placeholder='输入学院',required)
                     .form-group
                         label 专业
-                        input.form-control.profession(type='text',palceholder='输入专业',required)
+                        input.form-control.profession(type='text',placeholder='输入专业',required)
+                    .form-group
+                        label 项目
+                        select.form-control.combobox.project(required)
+                            option(value,selected='selected') 选择项目
+                            option(value='1') Pennsylvania
+                            option(value='2') Connecticut
+                            option(value='3') New York
+                            option(value='4') Maryland
+                            option(value='5') Virginia
                     .form-group
                         label 电话
-                        input.form-control.phone(type='text',palceholder='输入电话',required)
+                        input.form-control.phone(type='text',placeholder='输入电话',required)
                     .form-group
                         label Email
-                        input.form-control.email(type='email',palceholder='输入电话',required)
+                        input.form-control.email(type='email',placeholder='输入电话',required)
                     .form-group
                         label 简历
                         input.resume(type='file',required)
@@ -33,22 +42,25 @@ block content
                     tbody
                             tr
                                 td 姓名
-                                td 
+                                td.td-name 
                             tr
                                 td 学号
-                                td 
+                                td.td-no 
                             tr
                                 td 学院
-                                td 
+                                td.td-acadamy
                             tr
                                 td 专业
-                                td 
+                                td.td-profession 
+                            tr
+                                td 项目
+                                td.td-project
                             tr
                                 td 电话
-                                td 
+                                td.td-phone 
                             tr
                                 td Email
-                                td 
+                                td.td-email
                             tr
                                 td 简历
                                 td.td-resume

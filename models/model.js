@@ -15,7 +15,7 @@ function Model(collectionName) {
     this.collection = db.collection(collectionName);
 }
 
-['insert', 'find', 'findOne', 'remove', 'save', 'update'].forEach(function(method) {
+['insert', 'find', 'findOne', 'remove', 'save', 'update','fineAndModify'].forEach(function(method) {
     Model.prototype[method] = function() {
         this.collection[method].apply(this.collection, arguments);
     }

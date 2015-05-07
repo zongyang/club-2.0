@@ -1,7 +1,7 @@
 var Model = require('./model.js');
 var util = require('util');
 
-function Register(shopId, address) {
+function Register() {
 	Model.call(this, 'register');
 	//子类定义的非原型属性放在这个后面，不然会被覆盖
 }

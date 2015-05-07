@@ -7,27 +7,31 @@ var Introduce = require('../models/introduce');
 var Carousel = require('../models/carousel');
 var Member = require('../models/member');
 var Register = require('../models/register');
+var Settings = require('../models/settings');
 var ObjectId = require('mongojs').ObjectId;
 var multer = require('multer');
-var fs = require('fs');
 
 router.get('/', function(req, res, next) {
     var carousel = new Carousel();
     var news = new News();
     var project = new Project();
-
+    var settings = new Settings();
     carousel.sortByDate(function(err1, carousels) {
         news.sortByDate(function(err2, newses) {
             project.sortByDate(function(err3, projects) {
-                res.render('index/index', {
-                    module: 'index',
-                    carousels: carousels,
-                    newses: newses,
-                    projects: projects,
-                    page: {
-                        admin: false,
-                        index: true
-                    }
+                settings.findOne({}, function(err, settings) {
+                    settings = (settings) ? settings : {}
+                    res.render('index/index', {
+                        module: 'index',
+                        carousels: carousels,
+                        newses: newses,
+                        projects: projects,
+                        page: {
+                            admin: false,
+                            index: true
+                        },
+                        _switch: settings.switch
+                    })
                 })
             })
         })
@@ -35,35 +39,11 @@ router.get('/', function(req, res, next) {
 })
 
 router.get('/introduce', function(req, res, next) {
-
-    (new Introduce()).findOne({},
-        function(err, doc) {
-            doc = (doc) ? doc : {};
-            res.render('introduce/introduce', {
-                module: 'introduce',
-                doc: doc,
-                page: {
-                    admin: false,
-                    introduce: true
-                }
-            });
-        });
+    findByModule('introduce', res);
 });
 
 router.get('/member', function(req, res, next) {
-
-    (new Member()).findOne({},
-        function(err, doc) {
-            doc = (doc) ? doc : {};
-            res.render('member/member', {
-                module: 'member',
-                doc: doc,
-                page: {
-                    admin: false,
-                    member: true
-                }
-            });
-        });
+    findByModule('member', res);
 });
 
 
@@ -71,42 +51,32 @@ router.get('/news', function(req, res, next) {
     var obj = {
         _id: ObjectId(req.query.id)
     };
-    (new News()).findOne(obj, function(err, doc) {
-        doc = (doc) ? doc : {};
-        res.render('news/news', {
-            module: 'news',
-            doc: doc,
-            page: {
-                admin: false,
-                news: true
-            }
-        })
-    })
+    findByModule('news', res, obj);
+
 })
 
 router.get('/project', function(req, res, next) {
     var obj = {
         _id: ObjectId(req.query.id)
     };
-    (new Project()).findOne(obj, function(err, doc) {
-        doc = (doc) ? doc : {};
-        res.render('project/project', {
-            module: 'project',
-            doc: doc,
-            page: {
-                admin: false,
-                project: true
-            }
-        })
-    })
+    findByModule('project', res, obj);
 })
 router.get('/register', function(req, res, next) {
-    res.render('register/register', {
-        module: 'register',
-        page: {
-            admin: false,
-            register: true
-        }
+    var settings = new Settings();
+    settings.findOne({}, function(err, settings) {
+        settings = (settings) ? settings : {}
+        if (settings.switch) {
+            res.render('register/register', {
+                module: 'register',
+                page: {
+                    admin: false,
+                    register: true
+                },
+                _switch: settings.switch
+            })
+        } else
+            res.send('暂未开通报名功能，请联系管理员开通报名功能')
+
     })
 })
 
@@ -173,8 +143,6 @@ router.post('/register/add', function(req, res, next) {
             info: doc
         })
     })
-
-
 })
 
 function checkRegister(body) {
@@ -210,5 +178,34 @@ function checkRegister(body) {
     }
 
 }
+
+function findByModule(_module, res, query) {
+    query = (query) ? query : {}
+    var models = {
+        introduce: new Introduce,
+        member: new Member,
+        news: new News,
+        project: new Project,
+        register: new Register
+    }
+    var settings = new Settings();
+
+    models[_module].findOne(query, function(err, doc) {
+        doc = (doc) ? doc : {};
+        settings.findOne({}, function(err, settings) {
+            settings = (settings) ? settings : {};
+            res.render(_module + '/' + _module, {
+                module: _module,
+                doc: doc,
+                page: {
+                    admin: false,
+                    _module: true
+                },
+                _switch: settings.switch
+            });
+        })
+    })
+}
+
 
 module.exports = router;

@@ -5,7 +5,7 @@ var login = require('./login.js');
 var modify = require('./modify.js');
 var carousel = require('./carousel.js');
 var index = require('./index.js');
-
+var register = require('./register.js')
 
 router.use('/', function(req, res, next) {
 	var reg = /^\/login/; //登陆时不需要验证
@@ -24,8 +24,9 @@ router.use('/login', login);
 router.use('/index', index);
 router.use('/carousel', carousel);
 router.use('/modify', modify);
+router.use('/register', register);
 //有编辑器插件的路由
-['news', 'project', 'introduce', 'member', 'register'].forEach(function(type) {
+['news', 'project', 'introduce', 'member'].forEach(function(type) {
 	router.use('/' + type, function(res, req, next) {
 		editors(router, type);
 		next();

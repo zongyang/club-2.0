@@ -2,7 +2,7 @@ var Model = require('./model.js');
 var util = require('util');
 var settings = require('../settings.js');
 
-function Login(shopId, address) {
+function Login() {
 
 	Model.call(this, 'admin');
 	//子类定义的非原型属性放在这个后面，不然会被覆盖
