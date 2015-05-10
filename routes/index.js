@@ -63,17 +63,25 @@ router.get('/project', function(req, res, next) {
 })
 router.get('/register', function(req, res, next) {
     var settings = new Settings();
+    var project = new Project();
     settings.findOne({}, function(err, settings) {
         settings = (settings) ? settings : {}
         if (settings.switch) {
-            res.render('register/register', {
-                module: 'register',
-                page: {
-                    admin: false,
-                    register: true
-                },
-                _switch: settings.switch
+            project.find({}, {
+                name: true
+            }, function(err, projects) {
+                console.log(projects)
+                res.render('register/register', {
+                    module: 'register',
+                    page: {
+                        admin: false,
+                        register: true
+                    },
+                    projects: projects,
+                    _switch: settings.switch
+                })
             })
+
         } else
             res.send('暂未开通报名功能，请联系管理员开通报名功能')
 
@@ -98,8 +106,6 @@ router.post('/register/add', multer({
         fileSize: 10 * 1024 * 1024 //10MB
     },
     onFileUploadStart: function(file, req, res) {
-
-
 
     },
     onFileUploadComplete: function(file, req, res) {

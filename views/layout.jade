@@ -72,23 +72,34 @@ html(lang='zh-CN')
                 +index-li(page.introduce,'/introduce','社团简介','glyphicon-education')
                 +index-li(page.member,'/member','人员组成','glyphicon-user')
                 if _switch
-                  +index-li(page.register,'/register','报名入口','glyphicon-registration-mark') 
+                  +index-li(page.register,'/register','报名入口','glyphicon-registration-mark')
+              unless page.admin
+                ul.nav.navbar-nav.navbar-right 
+                  li.dropdown
+                    a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                      | 管理 
+                      span.caret
+                    ul.dropdown-menu(role='menu')
+                      li
+                        a(href='/admin/login') 后台管理
     block content
 
     // FOOTER
     footer.container
-      hr
-      p.pull-right
-        a(href='#') Back to top
-      address
-        strong 中山大学智能硬件和数据分析俱乐部
-        br
-        abbr(title='Address') 地址:
-        |   中山大学东校区南实验楼
-        br
-        abbr(title='Phone') 电话:
-        |  020-7787788
-
+      .row
+        .col-md-3
+           address
+            strong 中山大学智能硬件和数据分析俱乐部
+            br
+            abbr(title='Address') 地址:
+            |   中山大学东校区南实验楼
+            br
+            abbr(title='Phone') 电话:
+            |  020-7787788
+        .col-md-6
+        .col-md-3
+          .text-right 
+            a(href='#') 回到顶部
          
     //Bootstrap core JavaScript
     // Placed at the end of the document so the pages load faster

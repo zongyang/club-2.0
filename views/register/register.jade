@@ -21,11 +21,8 @@ block content
                         label 项目
                         select.form-control.combobox.project(required)
                             option(value,selected='selected') 选择项目
-                            option(value='1') Pennsylvania
-                            option(value='2') Connecticut
-                            option(value='3') New York
-                            option(value='4') Maryland
-                            option(value='5') Virginia
+                            each project in projects
+                                option(value='#{project._id}') #{project.name}
                     .form-group
                         label 电话
                         input.form-control.phone(type='text',placeholder='输入电话',required)
